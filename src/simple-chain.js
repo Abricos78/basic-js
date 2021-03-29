@@ -7,7 +7,7 @@ const chainMaker = {
   },
   addLink(value) {
     value !== undefined ? this.arr.push(` ${value} `) : this.arr.push(' ')
-    return chainMaker
+    return this
   },
   removeLink(position) {
     if (typeof position !== 'number' || !Number.isInteger(position) || position > this.arr.length) {
@@ -17,12 +17,12 @@ const chainMaker = {
       const arr1 = this.arr.slice(0, position - 1)
       const arr2 = this.arr.slice(position)
       this.arr = arr1.concat(arr2)
-      return chainMaker
+      return this
     }
   },
   reverseChain() {
     this.arr.reverse()
-    return chainMaker
+    return this
   },
   finishChain() {
     let result = this.arr.map(el => `(${el})`).join('~~')
