@@ -2,21 +2,20 @@ const CustomError = require("../extensions/custom-error");
 
 module.exports = class DepthCalculator {
   
-  maxDepth = 1
-
-  calculateDepth(arr, count = 1) {
-    arr.forEach(item => {
-      if (Array.isArray(item)) {
-        this.calculateDepth(item, count + 1)
+  calculateDepth(arr) {
+    let maxDepth = 1;
+    
+    arr.forEach(el => {
+      if(Array.isArray(el)) {
+        let currentDepth = 1
+        currentDepth = 1 + this.calculateDepth(el)
+        if (currentDepth > maxDepth) {
+          maxDepth = currentDepth
+        }
       }
     })
-    if (count > this.maxDepth) {
-      this.maxDepth = count
-      count = 0
-    } else {
-      count = 0
-    }
-    return this.maxDepth
+
+    return maxDepth;
   }
 
 };
